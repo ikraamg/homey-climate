@@ -1,0 +1,48 @@
+---
+strategy: plugin_merge
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: ''
+polling_verb: get
+framework_version: 3.1.8
+serverless_language: ''
+polling_url: ''
+polling_headers: ''
+polling_body: ''
+id: 406891
+oauth_enabled: 'false'
+oauth_pkce_enabled: 'no'
+oauth_authorize_url: ''
+oauth_token_url: ''
+oauth_scopes: ''
+oauth_scope_separator: ''
+oauth_refresh_url: ''
+oauth_auth_params: ''
+oauth_token_headers: ''
+oauth_token_site: ''
+oauth_token_params: ''
+oauth_token_request_auth_method: ''
+oauth_body_format: ''
+oauth_token_response_metadata: ''
+oauth_authorization_method: ''
+oauth_refresh_params: ''
+oauth_token_field_name: ''
+oauth_expiry_field_name: ''
+oauth_expiry_strategy: ''
+oauth_fixed_expiry_ms: ''
+custom_fields:
+- keyname: homey
+  field_type: plugin_instance_select
+  name: Homey data source
+  plugin_keyname: homey
+  help_text: Choose the Homey plugin that receives your pushes.
+  description: Pick your Homey plugin — this recipe renders its devices.
+- keyname: about
+  field_type: author_bio
+  name: About This Recipe
+  category: environment
+  description: Built by the TRMNL team — turns a Homey Pro snapshot into an e-ink dashboard.
+  github_url: https://github.com/usetrmnl/trmnl-liquid-components
+name: Homey Climate
+description: ''
+refresh_interval: 15
