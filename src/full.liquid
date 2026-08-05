@@ -1,0 +1,14 @@
+{%- comment -%} native Homey source is flat; webhook nests under merge_variables — read whichever is present {%- endcomment -%}
+{%- assign homey_data = homey.merge_variables | default: homey -%}
+{%- assign devices = homey_data.devices -%}
+{% if devices == blank %}
+  <div class="layout layout--col gap flex flex--center">
+    <span class="label label--gray">Waiting for the first push from Homey…</span>
+  </div>
+  <div class="title_bar">
+    <span class="title">Climate</span>
+    <span class="instance">Not connected</span>
+  </div>
+{% else %}
+  {% render "homey_climate", devices: devices %}
+{% endif %}
