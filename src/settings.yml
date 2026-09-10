@@ -31,18 +31,18 @@ oauth_expiry_field_name: ''
 oauth_expiry_strategy: ''
 oauth_fixed_expiry_ms: ''
 custom_fields:
+- keyname: about
+  field_type: author_bio
+  name: About This Recipe
+  category: environment
+  description: Average temperature and humidity across the house, with every sensor listed underneath so you can see which room is the outlier. Needs the native Homey plugin as its source, so add that first and point this at it.
+  github_url: https://github.com/usetrmnl/trmnl-liquid-components
 - keyname: homey
   field_type: plugin_instance_select
   name: Homey data source
   plugin_keyname: homey
   help_text: Choose the Homey plugin that receives your pushes.
-  description: Pick your Homey plugin — this recipe renders its devices.
-- keyname: about
-  field_type: author_bio
-  name: About This Recipe
-  category: environment
-  description: Built by the TRMNL team — turns a Homey Pro snapshot into an e-ink dashboard.
-  github_url: https://github.com/usetrmnl/trmnl-liquid-components
+  description: Pick your Homey plugin. This recipe renders its devices.
 name: Homey Climate
 description: ''
 refresh_interval: 15
