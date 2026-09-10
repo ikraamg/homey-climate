@@ -25,7 +25,8 @@
         {% if sensor_count == 1 %}
           {% assign solo = sensors | first %}
           <span class="value value--xlarge lg:value--xxlarge value--tnums" data-fit-value="true">{{ solo.temperature }}&deg;</span>
-          <span class="label" data-clamp="1">{% render "homey_glyph", icon: "measure-temperature" %}{{ solo.name }} &middot; {{ solo.zone }}</span>
+          {%- assign solo_battery = solo.capabilities.measure_battery -%}
+          <span class="label" data-clamp="1">{% render "homey_glyph", icon: "measure-temperature" %}{{ solo.name }} &middot; {{ solo.zone }}{% if solo_battery != blank %} &middot; {% render "homey_glyph", icon: "measure-battery" %}{{ solo_battery.display_value }}%{% endif %}</span>
         {% else %}
           <span class="value value--xlarge lg:value--xxlarge value--tnums" data-fit-value="true">{{ average }}&deg;</span>
           <span class="label">{% render "homey_glyph", icon: "measure-temperature" %}Average &middot; {{ sensor_count }} sensors</span>
