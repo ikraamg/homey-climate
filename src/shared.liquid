@@ -1,6 +1,10 @@
 {% template homey_climate %}
 {% assign live = devices | where_exp: "device", "device.available != false" %}
-{% assign sensors = live | where: "temperature" | sort: "zone" %}
+{% comment %} Room climate first: appliances report their own heat, the hub (homeyModelId) its chip. No klass = hand-built, keep it {% endcomment %}
+{% assign room_classes = "sensor,thermostat,airconditioning,fan" | split: "," %}
+{% assign readings = live | where: "temperature" | where_exp: "device", "device.capabilities.homeyModelId == nil" %}
+{% assign sensors = readings | where_exp: "device", "device.klass == nil or room_classes contains device.klass" | sort: "zone" %}
+{% if sensors.size == 0 %}{% assign sensors = readings | sort: "zone" %}{% endif %}
 {% assign sensor_count = sensors | size %}
 {% comment %} times: 1.0 first — divided_by truncates when both sides are integers {% endcomment %}
 {% if sensor_count > 0 %}{% assign average = sensors | sum: "temperature" | times: 1.0 | divided_by: sensor_count | round: 1 %}{% endif %}
@@ -48,9 +52,10 @@
       <div class="item">
         <div class="meta"></div>
         <div class="content">
-          <span class="value value--large value--tnums">{{ sensor.temperature }}&deg;{% if sensor.humidity %} &middot; {{ sensor.humidity }}%{% endif %}</span>
+          <span class="value value--large value--tnums">{{ sensor.temperature }}&deg;</span>
           {%- assign battery = sensor.capabilities.measure_battery -%}
           <span class="label" data-clamp="1">{{ sensor.name }} &middot; {{ sensor.zone }}</span>
+          {%- if sensor.humidity -%}<span class="label">{% render "homey_glyph", icon: "measure-humidity" %}{{ sensor.humidity }}%</span>{%- endif -%}
           {%- if battery != blank -%}<span class="label">{% render "homey_glyph", icon: "measure-battery" %}{{ battery.display_value }}%</span>{%- endif -%}
         </div>
       </div>
