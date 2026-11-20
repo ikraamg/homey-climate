@@ -42,7 +42,7 @@ custom_fields:
   field_type: plugin_instance_select
   name: Homey data source
   plugin_keyname: homey
-  help_text: Choose the Homey plugin that receives your pushes.
+  help_text: Choose your Homey plugin.
   description: Pick your Homey plugin. This recipe renders its devices.
 name: Homey Climate
 description: ''
